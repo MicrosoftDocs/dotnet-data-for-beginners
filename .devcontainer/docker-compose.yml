@@ -57,6 +57,19 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
+    neo:
+        # The image to use
+        image: neo4j:latest
+        # map the ports so we can check the db server is up
+        ports: 
+            - 7474:7474
+            - 7687:7687
+        # mounting a named volume to the container to track db data
+        volumes:
+            - neo4j_data:/data/
+        env_file:
+            - .env.neo4j
+            
   # neo4j:
   #   # Docker image to be used
   #   image: neo4j:5-enterprise
