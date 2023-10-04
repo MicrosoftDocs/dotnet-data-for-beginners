@@ -57,39 +57,39 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
-  neo4j:
-    # Docker image to be used
-    image: neo4j:5-enterprise
+  # neo4j:
+  #   # Docker image to be used
+  #   image: neo4j:5-enterprise
 
-    # The ports that will be accessible from outside the container - HTTP (7474) and Bolt (7687).
-    ports:
-      - "7474:7474"
-      - "7687:7687"
+  #   # The ports that will be accessible from outside the container - HTTP (7474) and Bolt (7687).
+  #   ports:
+  #     - "7474:7474"
+  #     - "7687:7687"
 
-    # Uncomment the volumes to be mounted to make them accessible from outside the container.
-    volumes:
-      - ./neo4j/neo4j.conf:/conf/neo4j.conf # This is the main configuration file.
-      - ./neo4j/data:/var/lib/neo4j/data
-      - ./neo4j/logs:/var/lib/neo4j/logs
-      - ./neo4j/conf:/var/lib/neo4j/conf
-      - ./neo4j/import:/var/lib/neo4j/import
-      #- ./metrics/server1:/var/lib/neo4j/metrics
-      #- ./licenses/server1:/var/lib/neo4j/licenses
-      #- ./ssl/server1:/var/lib/neo4j/ssl
+  #   # Uncomment the volumes to be mounted to make them accessible from outside the container.
+  #   volumes:
+  #     - ./neo4j/neo4j.conf:/conf/neo4j.conf # This is the main configuration file.
+  #     - ./neo4j/data:/var/lib/neo4j/data
+  #     - ./neo4j/logs:/var/lib/neo4j/logs
+  #     - ./neo4j/conf:/var/lib/neo4j/conf
+  #     - ./neo4j/import:/var/lib/neo4j/import
+  #     #- ./metrics/server1:/var/lib/neo4j/metrics
+  #     #- ./licenses/server1:/var/lib/neo4j/licenses
+  #     #- ./ssl/server1:/var/lib/neo4j/ssl
 
-    # Passes the following environment variables to the container
-    environment:
-      NEO4J_ACCEPT_LICENSE_AGREEMENT: yes
-      NEO4J_AUTH: password
-      EXTENDED_CONF: yes
-      NEO4J_EDITION: docker_compose
-      NEO4J_initial_server_mode__constraint: PRIMARY
+  #   # Passes the following environment variables to the container
+  #   environment:
+  #     NEO4J_ACCEPT_LICENSE_AGREEMENT: yes
+  #     NEO4J_AUTH: password
+  #     EXTENDED_CONF: yes
+  #     NEO4J_EDITION: docker_compose
+  #     NEO4J_initial_server_mode__constraint: PRIMARY
 
-    # Simple check testing whether the port 7474 is opened.
-    # If so, the instance running inside the container is considered as "healthy".
-    # This status can be checked using the "docker ps" command.
-    healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider localhost:7474 || exit 1"]
+  #   # Simple check testing whether the port 7474 is opened.
+  #   # If so, the instance running inside the container is considered as "healthy".
+  #   # This status can be checked using the "docker ps" command.
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider localhost:7474 || exit 1"]
 
 
 
