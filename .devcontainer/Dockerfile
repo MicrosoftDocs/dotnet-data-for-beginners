@@ -1,6 +1,4 @@
-# [Choice] .NET version: 6.0-focal, 5.0-focal, 3.1-focal
-ARG VARIANT="6.0-focal"
-FROM mcr.microsoft.com/vscode/devcontainers/dotnet:0-${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/dotnet:0-6.0-focal
 
 RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 8.0 --install-dir /usr/share/dotnet
 
