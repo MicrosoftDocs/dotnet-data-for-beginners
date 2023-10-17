@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.224.3/containers/dotnet-mssql
 {
-	"name": "Entity Framework Core for Beginners",
+	"name": "NET for Beginners-Data",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",
@@ -11,14 +11,14 @@
 			"settings": {
 				"mssql.connections": [
 					{
-						"server": "localhost,1433",
+						"server": "sqlserver,1433",
 						"database": "",
 						"authenticationType": "SqlLogin",
 						"user": "sa",
 						"password": "P@ssw0rd",
 						"emptyPasswordInput": false,
 						"savePassword": true,
-						"profileName": "mssql-container",
+						"profileName": "sqlserver",
 						"encrypt": false
 					}
 				]
@@ -26,19 +26,14 @@
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"ms-dotnettools.csharp",
-				"ms-mssql.mssql",
-				"ckolkman.vscode-postgres"
+				"ms-mssql.mssql"
 			]
 		}
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		1433,
-		5432,
-		8081,
-		7474,
-		7687
+
 	],
 	
 	"postCreateCommand": "bash .devcontainer/scripts/postCreateCommand.sh 'P@ssw0rd' './.devcontainer/data/' './.devcontainer/scripts/'",

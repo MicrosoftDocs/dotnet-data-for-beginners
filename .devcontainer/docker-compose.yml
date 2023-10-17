@@ -14,38 +14,31 @@ services:
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
 
-    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-    network_mode: service:db
+    # network_mode: service:sqlserver
 
-    # Uncomment the next line to use a non-root user for all processes.
-    # user: vscode
-
-    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
-    # (Adding the "ports" property to this file will not forward from a Codespace.)
-
-  db:
+  sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
     restart: unless-stopped
-    environment:
+    environment: 
       SA_PASSWORD: P@ssw0rd
       ACCEPT_EULA: Y
 
     # Add "forwardPorts": ["1433"] to **devcontainer.json** to forward MSSQL locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
-  postgres:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: "P@ssw0rd"
-    network_mode: service:db
+  # postgres:
+  #   image: postgres
+  #   restart: always
+  #   environment:
+  #     POSTGRES_PASSWORD: "P@ssw0rd"
+  #   network_mode: service:db
 
   mongo:
-      image: mongo
-      restart: always
-      environment:
-        MONGO_INITDB_ROOT_USERNAME: root
-        MONGO_INITDB_ROOT_PASSWORD: example
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
 
   mongo-express:
     image: mongo-express
@@ -57,52 +50,19 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
-    neo:
-        # The image to use
-        image: neo4j:latest
-        # map the ports so we can check the db server is up
-        ports: 
-            - 7474:7474
-            - 7687:7687
-        # mounting a named volume to the container to track db data
-        volumes:
-            - neo4j_data:/data/
-        env_file:
-            - .env.neo4j
-            
-  # neo4j:
-  #   # Docker image to be used
-  #   image: neo4j:5-enterprise
-
-  #   # The ports that will be accessible from outside the container - HTTP (7474) and Bolt (7687).
-  #   ports:
-  #     - "7474:7474"
-  #     - "7687:7687"
-
-  #   # Uncomment the volumes to be mounted to make them accessible from outside the container.
-  #   volumes:
-  #     - ./neo4j/neo4j.conf:/conf/neo4j.conf # This is the main configuration file.
-  #     - ./neo4j/data:/var/lib/neo4j/data
-  #     - ./neo4j/logs:/var/lib/neo4j/logs
-  #     - ./neo4j/conf:/var/lib/neo4j/conf
-  #     - ./neo4j/import:/var/lib/neo4j/import
-  #     #- ./metrics/server1:/var/lib/neo4j/metrics
-  #     #- ./licenses/server1:/var/lib/neo4j/licenses
-  #     #- ./ssl/server1:/var/lib/neo4j/ssl
-
-  #   # Passes the following environment variables to the container
-  #   environment:
-  #     NEO4J_ACCEPT_LICENSE_AGREEMENT: yes
-  #     NEO4J_AUTH: password
-  #     EXTENDED_CONF: yes
-  #     NEO4J_EDITION: docker_compose
-  #     NEO4J_initial_server_mode__constraint: PRIMARY
-
-  #   # Simple check testing whether the port 7474 is opened.
-  #   # If so, the instance running inside the container is considered as "healthy".
-  #   # This status can be checked using the "docker ps" command.
-  #   healthcheck:
-  #     test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider localhost:7474 || exit 1"]
-
-
-
+  neo:
+      # The image to use
+      image: neo4j:latest
+      # map the ports so we can check the db server is up
+      ports: 
+        - 7474:7474
+        - 7687:7687
+      # mounting a named volume to the container to track db data
+      volumes:
+        - ./neo4j/data:/data/
+      env_file:
+        - ./neo4j/.env.neo4j
+      
+networks:
+  default:
+    driver: bridge
