@@ -62,7 +62,4 @@ services:
         - ./neo4j/data:/data/
       env_file:
         - ./neo4j/.env.neo4j
-      
-networks:
-  default:
-    driver: bridge
+

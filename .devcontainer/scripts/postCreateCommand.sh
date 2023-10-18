@@ -62,3 +62,5 @@ then
         fi
     done
 fi
+
+dotnet dev-certs https
