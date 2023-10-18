@@ -60,6 +60,7 @@ services:
       # mounting a named volume to the container to track db data
       volumes:
         - ./neo4j/data:/data/
+        #- ./neo4j/conf:/conf/
       env_file:
         - ./neo4j/.env.neo4j
 
