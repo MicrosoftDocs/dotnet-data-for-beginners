@@ -1,6 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/dotnet:0-6.0-focal
-
-RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 8.0 --install-dir /usr/share/dotnet
+FROM mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
@@ -22,4 +20,4 @@ RUN bash ./installSQLtools.sh \
 RUN echo "export PATH=\"$PATH:/root/.dotnet/tools\"" >> ~/.bashrc
 
 # Generate the dev cert
-RUN dotnet dev-certs https
+# RUN dotnet dev-certs https

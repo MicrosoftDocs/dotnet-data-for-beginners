@@ -15,7 +15,7 @@
 						"database": "",
 						"authenticationType": "SqlLogin",
 						"user": "sa",
-						"password": "P@ssw0rd",
+						"password": "eGJqBakN$*B#dhQ9y48Q",
 						"emptyPasswordInput": false,
 						"savePassword": true,
 						"profileName": "sqlserver",
@@ -27,8 +27,8 @@
 			"extensions": [
 				"ms-dotnettools.csdevkit",
 				"ms-mssql.mssql",
-				"adamcowley.neo4j-vscode",
-				"mongodb.mongodb-vscode",
+				//"adamcowley.neo4j-vscode",
+				//"mongodb.mongodb-vscode",
 				"qwtel.sqlite-viewer"
 			]
 		}
@@ -39,8 +39,8 @@
 
 	],
 	
-	"postCreateCommand": "bash .devcontainer/scripts/postCreateCommand.sh 'P@ssw0rd' './.devcontainer/data/' './.devcontainer/scripts/'",
+	"postCreateCommand": "bash .devcontainer/scripts/postCreateCommand.sh 'eGJqBakN$*B#dhQ9y48Q' './.devcontainer/data/' './.devcontainer/scripts/'",
 	"features": {
-		// "azure-cli": "latest"
+		"azure-cli": "latest"
 	}
 }

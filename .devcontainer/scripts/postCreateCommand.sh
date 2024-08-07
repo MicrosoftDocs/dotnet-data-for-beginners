@@ -22,16 +22,17 @@ rm testsqlconnection.sql
 
 for f in $dacpath/*
 do
-    if [ $f == $dacpath/*".dacpac" ]
+    if [[  $f == $dacpath/*.dacpac ]]
     then
         dacpac="true"
         echo "Found dacpac $f"
     fi
 done
 
+echo $sqlpath
 for f in $sqlpath/*
 do
-    if [ $f == $sqlpath/*".sql" ]
+    if [[ $f == $sqlpath/*.sql ]]
     then
         sqlfiles="true"
         echo "Found SQL file $f"
@@ -42,7 +43,7 @@ if [ $sqlfiles == "true" ]
 then
     for f in $sqlpath/*
     do
-        if [ $f == $sqlpath/*".sql" ]
+        if [[ $f == $sqlpath/*.sql ]]
         then
             echo "Executing $f"
             /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P $SApassword -d master -i $f
@@ -54,7 +55,7 @@ if [ $dacpac == "true" ]
 then
     for f in $dacpath/*
     do
-        if [ $f == $dacpath/*".dacpac" ]
+        if [[ $f == $dacpath/*.dacpac ]]
         then
             dbname=$(basename $f ".dacpac")
             echo "Deploying dacpac $f"
@@ -62,5 +63,3 @@ then
         fi
     done
 fi
-
-dotnet dev-certs https
